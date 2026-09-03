@@ -1,0 +1,12 @@
+{
+  "identity": "edition:email:welcome:v1",
+  "version": "v1",
+  "provenance": "approval://catalogue/welcome-email@2026-09-03T00:00:00Z",
+  "payloadReferences": [
+    {
+      "kind": "mime",
+      "uri": "payload://email/welcome/v1.mime",
+      "checksum": "sha256:7c1a35be95ef6f6a26389f9c473f3e5e0f6f53ca5cf682fe3d29ac6fe53f4f3f"
+    }
+  ]
+}
