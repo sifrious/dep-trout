@@ -1,0 +1,12 @@
+{
+  "identity": "edition:telegram:incident-alert:v1",
+  "version": "v1",
+  "provenance": "approval://catalogue/incident-alert@2026-09-03T00:00:00Z",
+  "payloadReferences": [
+    {
+      "kind": "telegram-markdown",
+      "uri": "payload://telegram/incident-alert/v1.md",
+      "checksum": "sha256:95edb3fa42f97462f0479050465f7d4ca2fd722149005299f011f0eefd88e770"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+    "name": "sifrious/trout",
+    "description": "Provider-neutral delivery contracts for approved editions and destinations.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sifrious\\Trout\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sifrious\\Trout\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit --colors=always"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
