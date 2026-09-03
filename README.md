@@ -21,6 +21,32 @@ composer require sifrious/trout
 - `DeliveryReceipt`: traceable provider acknowledgement details without exposing
   provider policy behavior to callers.
 
+## Lifecycle contracts published in MME-1351
+
+- `DeliveryState`: provider-neutral lifecycle states and an explicit, queryable
+  transition table.
+- `DeliveryTransition`: actor-attributed transition records with validation
+  against allowed state changes.
+- `ApprovalState`: approval lifecycle state and dispatch eligibility.
+- `DeliverySchedule`: immutable schedule/unschedule state with actor
+  attribution.
+- `RetryPolicy`: safe retry eligibility and immutable prior-attempt
+  preservation.
+- `Cancellation`: cancellation eligibility classification, including accepted
+  work that cannot be canceled.
+
+### Delivery state transition table
+
+| From state         | Allowed transitions                  |
+|--------------------|--------------------------------------|
+| `pending_approval` | `approved`, `canceled`               |
+| `approved`         | `scheduled`, `dispatching`, `canceled` |
+| `scheduled`        | `approved` (unschedule), `dispatching`, `canceled` |
+| `dispatching`      | `accepted`, `failed`                 |
+| `accepted`         | _(none)_                             |
+| `failed`           | `dispatching` (retry), `canceled`    |
+| `canceled`         | _(none)_                             |
+
 ## Fixture payloads
 
 The package includes one fixture for each required edition family:
@@ -44,11 +70,22 @@ The package includes one fixture for each required edition family:
   a request.
 - **Delivery receipt**: provider acknowledgement data that is traceable but does
   not leak provider-specific acceptance policy into the domain contract.
+- **Approval state**: whether requested work is pending approval, approved for
+  dispatch, or rejected.
+- **Delivery state**: lifecycle status from approval gating through scheduling,
+  dispatching, acceptance/failure, and cancellation.
+- **Delivery transition**: explicit, actor-attributed, validated state change
+  between two lifecycle states.
+- **Delivery schedule**: immutable scheduling intent for deferred dispatch,
+  including unscheduling attribution.
+- **Retry policy**: max-attempt and prior-attempt history contract used to
+  decide whether another retry is safe.
+- **Cancellation**: contract describing cancelable vs non-cancelable lifecycle
+  work (including accepted work that cannot be canceled).
 
 ## Out of scope in this package revision
 
 - Email-specific payload objects and adapters (MME-1339).
-- Lifecycle state/transition scheduling and retry policies (MME-1351).
 - Attempt/retry outcome tracking in Funes (MME-1346).
 - Provider SDK adapters, UI concerns, campaign dispatch, and canonical evidence
   ownership.
@@ -58,5 +95,3 @@ The package includes one fixture for each required edition family:
 ```bash
 composer test
 ```
-
-Nothing is implemented yet.
